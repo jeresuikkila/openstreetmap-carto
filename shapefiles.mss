@@ -1,3 +1,5 @@
+@admin-boundaries: #ac46ac;
+
 #necountries {
   [zoom >= 1][zoom < 4] {
     line-width: 0.2;

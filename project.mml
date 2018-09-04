@@ -1,7 +1,7 @@
 scale: 1
 metatile: 2
-name: OpenStreetMap Carto
-description: A general-purpose OpenStreetMap mapnik style, in CartoCSS
+name: Kandi-carto
+description: Modified styles for Bachelor's Thesis from the OpenStreetMap mapnik style
 bounds: &world
   - -180
   - -85.05112877980659
@@ -49,7 +49,6 @@ Stylesheet:
   - stations.mss
   - amenity-points.mss
   - aerialways.mss
-  - admin.mss
 Layer:
   - id: world
     geometry: polygon
