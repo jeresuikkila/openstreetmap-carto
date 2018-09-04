@@ -36,7 +36,7 @@ _parts:
     extent: "-20037508,-20037508,20037508,20037508"
 
 Stylesheet:
-  - style.mss
+  - kandi-background.mss
   - buildings.mss
 Layer:
   - id: world
