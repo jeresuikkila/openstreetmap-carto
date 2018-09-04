@@ -2782,25 +2782,7 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
 
   [highway = 'unclassified'],
   [highway = 'residential'] {
-    [zoom >= 15] {
-      text-name: "[refs]";
-      text-size: 8;
-
-      [zoom >= 16] {
-        text-size: 9;
-      }
-      [zoom >= 18] {
-        text-size: 10;
-      }
-
-      text-fill: #000;
-      text-face-name: @book-fonts;
-      text-min-distance: 40;
-      text-halo-radius: 2;
-      text-halo-fill: @standard-halo-fill;
-      text-spacing: 760;
-      text-clip: false;
-    }
+    /* Removed road name text */
   }
 
   [highway = 'runway'],
@@ -2827,99 +2809,18 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   [highway = 'construction'][construction = 'motorway'],
   [highway = 'construction'][construction = 'trunk'],
   [highway = 'construction'][construction = 'primary'] {
-    [zoom >= 13] {
-      text-name: "[name]";
-      text-size: 8;
-      text-fill: black;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      [tunnel = 'no'] {
-        text-halo-radius: @standard-halo-radius;
-        [highway = 'motorway'] { text-halo-fill: @motorway-fill; }
-        [highway = 'trunk'] { text-halo-fill: @trunk-fill; }
-        [highway = 'primary'] { text-halo-fill: @primary-fill; }
-      }
-    }
-    [zoom >= 14] {
-      text-size: 9;
-    }
-    [zoom >= 15] {
-      text-size: 10;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-    }
-    [zoom >= 19] {
-      text-size: 12;
-    }
+    /* Removed road name text */
   }
   [highway = 'secondary'],
   [highway = 'construction'][construction = 'secondary'] {
-    [zoom >= 13] {
-      text-name: "[name]";
-      text-size: 8;
-      text-fill: black;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @secondary-fill;
-    }
-    [zoom >= 14] {
-      text-size: 9;
-    }
-    [zoom >= 15] {
-      text-size: 10;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-    }
-    [zoom >= 19] {
-      text-size: 12;
-    }
+    /* Removed road name text */
   }
   [highway = 'tertiary'],
   [highway = 'construction'][construction = 'tertiary'] {
-    [zoom >= 14] {
-      text-name: "[name]";
-      text-size: 9;
-      text-fill: black;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @tertiary-fill;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-    }
-    [zoom >= 19] {
-      text-size: 12;
-    }
+    /* Removed road name text */
   }
   [highway = 'construction'][construction = null][zoom >= 16] {
-    text-name: "[name]";
-    text-size: 9;
-    text-fill: black;
-    text-spacing: 300;
-    text-clip: false;
-    text-placement: line;
-    text-halo-radius: @standard-halo-radius;
-    text-halo-fill: @standard-halo-fill;
-    text-face-name: @book-fonts;
-
-    [zoom >= 17] {
-      text-size: 11;
-      text-spacing: 400;
-    }
-    [zoom >= 19] {
-      text-size: 12;
-      text-spacing: 400;
-    }
+    /* Removed road name text */
   }
   [highway = 'residential'],
   [highway = 'unclassified'],
@@ -2927,138 +2828,34 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   [highway = 'construction'][construction = 'residential'],
   [highway = 'construction'][construction = 'unclassified'],
   [highway = 'construction'][construction = 'road'] {
-    [zoom >= 15] {
-      text-name: "[name]";
-      text-size: 8;
-      text-fill: black;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @residential-fill;
-      text-face-name: @book-fonts;
-    }
-    [zoom >= 16] {
-      text-size: 9;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-      text-spacing: 400;
-    }
-    [zoom >= 19] {
-      text-size: 12;
-      text-spacing: 400;
-    }
+    /* Removed road name text */
   }
 
   [highway = 'raceway'],
   [highway = 'service'],
   [highway = 'construction'][construction = 'raceway'],
   [highway = 'construction'][construction = 'service'] {
-    [zoom >= 16] {
-      text-name: "[name]";
-      text-size: 9;
-      text-fill: black;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-halo-radius: @standard-halo-radius;
-      [highway = 'raceway'] { text-halo-fill: @raceway-fill; }
-      [highway = 'service'] { text-halo-fill: @service-fill; }
-      text-face-name: @book-fonts;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-    }
+    /* Removed road name text */
   }
 
   [highway = 'living_street'],
   [highway = 'pedestrian'],
   [highway = 'construction'][construction = 'living_street'],
   [highway = 'construction'][construction = 'pedestrian'] {
-    [zoom >= 15] {
-      text-name: "[name]";
-      text-size: 8;
-      text-fill: black;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-halo-radius: @standard-halo-radius;
-      [highway = 'living_street'] { text-halo-fill: @living-street-fill; }
-      [highway = 'pedestrian'] { text-halo-fill: @pedestrian-fill; }
-      text-face-name: @book-fonts;
-    }
-    [zoom >= 16] {
-      text-size: 9;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-    }
-    [zoom >= 19] {
-      text-size: 12;
-    }
+    /* Removed road name text */
   }
 }
 
 #roads-area-text-name {
   [way_pixels > 3000],
   [zoom >= 17] {
-    text-name: "[name]";
-    text-size: 11;
-    text-face-name: @book-fonts;
-    text-placement: interior;
-    text-wrap-width: 30; // 2.7 em
-    text-line-spacing: -1.7; // -0.15 em
+    /* Removed road name text */
   }
 }
 
 #paths-text-name {
   [highway = 'track'] {
-    [zoom >= 15] {
-      text-name: "[name]";
-      text-fill: #222;
-      text-size: 8;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      text-vertical-alignment: middle;
-      text-dy: 5;
-    }
-    [zoom >= 16] {
-      text-size: 9;
-      text-dy: 7;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-      text-dy: 9;
-    }
-  }
-
-  [highway = 'bridleway'],
-  [highway = 'footway'],
-  [highway = 'cycleway'],
-  [highway = 'path'],
-  [highway = 'steps'] {
-    [zoom >= 16] {
-      text-name: "[name]";
-      text-fill: #222;
-      text-size: 9;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      text-spacing: 300;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      text-vertical-alignment: middle;
-      text-dy: 7;
-    }
-    [zoom >= 17] {
-      text-size: 11;
-      text-dy: 9;
-    }
+    /* Removed road name text */
   }
 }
 
@@ -3161,112 +2958,5 @@ tertiary is rendered from z10 and is not included in osm_planet_roads. */
   }
 }
 #railways-text-name {
-  /* Mostly started from z17. */
-  [railway = 'rail'],
-  [railway = 'subway'],
-  [railway = 'narrow_gauge'],
-  [railway = 'light_rail'],
-  [railway = 'preserved'],
-  [railway = 'funicular'],
-  [railway = 'monorail'],
-  [railway = 'tram'] {
-    [zoom >= 17] {
-      text-name: "[name]";
-      text-fill: #666666;
-      text-size: 10;
-      text-dy: 6;
-      text-spacing: 900;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      text-repeat-distance: @railway-text-repeat-distance;
-    }
-    [zoom >= 19] {
-      text-size: 11;
-      text-dy: 7;
-    }
-  }
-  [railway = 'rail'] {
-    /* Render highspeed rails from z11,
-       other main routes at z14. */
-    [highspeed = 'yes'] {
-      [zoom >= 11] {
-        text-name: "[name]";
-        text-fill: #666666;
-        text-size: 10;
-        text-dy: 3;
-        text-spacing: 300;
-        text-clip: false;
-        text-placement: line;
-        text-face-name: @book-fonts;
-        text-halo-radius: @standard-halo-radius;
-        text-halo-fill: @standard-halo-fill;
-        text-repeat-distance: @railway-text-repeat-distance;
-      }
-      [zoom >= 13] {
-        text-dy: 6;
-      }
-      [zoom >= 14] {
-        text-spacing: 600;
-      }
-      [zoom >= 17] {
-        text-size: 11;
-        text-dy: 7;
-      }
-      [zoom >= 19] {
-        text-size: 12;
-        text-dy: 8;
-      }
-    }
-    [highspeed != 'yes'][usage = 'main'] {
-      [zoom >= 14] {
-        text-name: "[name]";
-        text-fill: #666666;
-        text-size: 10;
-        text-dy: 6;
-        text-spacing: 300;
-        text-clip: false;
-        text-placement: line;
-        text-face-name: @book-fonts;
-        text-halo-radius: @standard-halo-radius;
-        text-halo-fill: @standard-halo-fill;
-        text-repeat-distance: @railway-text-repeat-distance;
-      }
-      [zoom >= 17] {
-        text-spacing: 600;
-        text-size: 11;
-        text-dy: 7;
-      }
-      [zoom >= 19] {
-        text-size: 12;
-        text-dy: 8;
-      }
-    }
-  }
-  /* Other minor railway styles. For service rails, see:
-     https://github.com/gravitystorm/openstreetmap-carto/pull/2687 */
-  [railway = 'preserved'],
-  [railway = 'miniature'],
-  [railway = 'disused'],
-  [railway = 'construction'] {
-    [zoom >= 17] {
-      text-name: "[name]";
-      text-fill: #666666;
-      text-size: 10;
-      text-dy: 6;
-      text-spacing: 900;
-      text-clip: false;
-      text-placement: line;
-      text-face-name: @book-fonts;
-      text-halo-radius: @standard-halo-radius;
-      text-halo-fill: @standard-halo-fill;
-      text-repeat-distance: @railway-text-repeat-distance;
-    }
-    [zoom >= 19] {
-      text-size: 11;
-      text-dy: 7;
-    }
-  }
+  /* Removed road name text */
 }
