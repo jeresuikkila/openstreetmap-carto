@@ -39,7 +39,13 @@ Stylesheet:
   - kandi-background.mss
   - fonts.mss
   - shapefiles.mss
+  - landcover.mss
+  - water.mss
+  - water-features.mss
+  - placenames.mss
+  - buildings.mss
   - amenity-points.mss
+  - aerialways.mss
 
 Layer:
   - id: amenity-points-poly
@@ -291,22 +297,3 @@ Layer:
     properties:
       minzoom: 14
   - id: amenity-low-priority-poly
-    class: amenity-low-priority
-    geometry: polygon
-    <<: *extents
-    Datasource:
-      <<: *osm2pgsql
-      table: |-
-        (SELECT
-            way,
-            COALESCE(
-              'amenity_' || CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking') THEN amenity ELSE NULL END,
-              'barrier_' || CASE WHEN barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log') THEN barrier ELSE NULL END
-            )  AS feature,
-            access
-          FROM planet_osm_polygon p
-          WHERE amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking')
-             OR barrier IN ('bollard', 'gate', 'lift_gate', 'swing_gate', 'block', 'log')
-          ) AS amenity_low_priority_poly
-    properties:
-      minzoom: 14
