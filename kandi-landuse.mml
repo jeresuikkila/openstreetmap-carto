@@ -1,0 +1,109 @@
+scale: 1
+metatile: 2
+name: Kandi-carto
+description: Modified styles for Bachelor's Thesis from the OpenStreetMap mapnik style
+bounds: &world
+  - -180
+  - -85.05112877980659
+  - 180
+  - 85.05112877980659
+center:
+  - 0
+  - 0
+  - 4
+format: png
+interactivity: false
+minzoom: 0
+maxzoom: 22
+srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+
+# Various parts to be included later on
+_parts:
+  # Extents are used for tilemill, and don't actually make it to the generated XML
+  extents: &extents
+    extent: *world
+    srs-name: "900913"
+    srs: "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  extents84: &extents84
+    extent: *world
+    srs-name: "WGS84"
+    srs: "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+  osm2pgsql: &osm2pgsql
+    type: "postgis"
+    dbname: "gis"
+    key_field: ""
+    geometry_field: "way"
+    extent: "-20037508,-20037508,20037508,20037508"
+
+Stylesheet:
+  - kandi-background.mss
+  - landcover.mss
+
+Layer:
+  - id: landcover
+    geometry: polygon
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way, name, religion, way_pixels,
+            COALESCE(aeroway, amenity, wetland, power, landuse, leisure, man_made, military, "natural", tourism, highway, railway) AS feature
+          FROM (SELECT
+              way, COALESCE(name, '') AS name,
+              ('aeroway_' || (CASE WHEN aeroway IN ('apron', 'aerodrome') THEN aeroway ELSE NULL END)) AS aeroway,
+              ('amenity_' || (CASE WHEN amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'university', 'college', 'school', 'taxi',
+                                                    'hospital', 'kindergarten', 'grave_yard', 'prison', 'place_of_worship', 'clinic', 'ferry_terminal',
+                                                    'marketplace', 'community_centre', 'social_facility', 'arts_centre', 'parking_space', 'bus_station', 
+                                                    'fire_station', 'police') THEN amenity ELSE NULL END)) AS amenity,
+              ('landuse_' || (CASE WHEN landuse IN ('quarry', 'vineyard', 'orchard', 'cemetery', 'residential', 'garages', 'meadow', 'grass',
+                                                    'allotments', 'forest', 'farmyard', 'farmland', 'greenhouse_horticulture',
+                                                    'recreation_ground', 'village_green', 'retail', 'industrial', 'railway', 'commercial',
+                                                    'brownfield', 'landfill', 'construction', 'plant_nursery', 'religious') THEN landuse ELSE NULL END)) AS landuse,
+              ('leisure_' || (CASE WHEN leisure IN ('swimming_pool', 'playground', 'park', 'recreation_ground', 'common', 'garden',
+                                                    'golf_course', 'miniature_golf', 'sports_centre', 'stadium', 'pitch',
+                                                    'track', 'dog_park', 'fitness_station') THEN leisure ELSE NULL END)) AS leisure,
+              ('man_made_' || (CASE WHEN man_made IN ('works') THEN man_made ELSE NULL END)) AS man_made,
+              ('military_' || (CASE WHEN military IN ('danger_area') THEN military ELSE NULL END)) AS military,
+              ('natural_' || (CASE WHEN "natural" IN ('beach', 'shoal', 'heath', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub') THEN "natural" ELSE NULL END)) AS "natural",
+              ('wetland_' || (CASE WHEN "natural" IN ('wetland', 'marsh', 'mud') THEN (CASE WHEN "natural" IN ('marsh', 'mud') THEN "natural" ELSE tags->'wetland' END) ELSE NULL END)) AS wetland,
+              ('power_' || (CASE WHEN power IN ('station', 'sub_station', 'substation', 'generator') THEN power ELSE NULL END)) AS power,
+              ('tourism_' || (CASE WHEN tourism IN ('camp_site', 'caravan_site', 'picnic_site') THEN tourism ELSE NULL END)) AS tourism,
+              ('highway_' || (CASE WHEN highway IN ('services', 'rest_area') THEN highway ELSE NULL END)) AS highway,
+              ('railway_' || (CASE WHEN railway = 'station' THEN railway ELSE NULL END)) AS railway,
+              CASE WHEN religion IN ('christian', 'jewish', 'muslim') THEN religion ELSE 'INT-generic'::text END AS religion,
+              way_area/NULLIF(!pixel_width!::real*!pixel_height!::real,0) AS way_pixels
+            FROM planet_osm_polygon
+            WHERE (landuse IS NOT NULL
+              OR leisure IS NOT NULL
+              OR aeroway IN ('apron', 'aerodrome')
+              OR amenity IN ('parking', 'bicycle_parking', 'motorcycle_parking', 'taxi', 'university', 'college', 'school', 'hospital', 'kindergarten',
+                             'grave_yard', 'place_of_worship', 'prison', 'clinic', 'ferry_terminal', 'marketplace', 'community_centre', 'social_facility',
+                             'arts_centre', 'parking_space', 'bus_station', 'fire_station', 'police')
+              OR man_made IN ('works')
+              OR military IN ('danger_area')
+              OR "natural" IN ('beach', 'shoal', 'heath', 'mud', 'marsh', 'wetland', 'grassland', 'wood', 'sand', 'scree', 'shingle', 'bare_rock', 'scrub')
+              OR power IN ('station', 'sub_station', 'substation', 'generator')
+              OR tourism IN ('camp_site', 'caravan_site', 'picnic_site')
+              OR highway IN ('services', 'rest_area')
+              OR railway = 'station')
+              AND way_area > 1*!pixel_width!::real*!pixel_height!::real
+            ORDER BY way_area DESC
+          ) AS landcover
+        ) AS features
+    properties:
+      minzoom: 10
+  - id: landcover-line
+    geometry: linestring
+    <<: *extents
+    Datasource:
+      <<: *osm2pgsql
+      table: |-
+        (SELECT
+            way
+          FROM planet_osm_line
+          WHERE man_made = 'cutline'
+        ) AS landcover_line
+    properties:
+      minzoom: 14
+  
