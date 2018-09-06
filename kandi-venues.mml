@@ -36,18 +36,11 @@ _parts:
     extent: "-20037508,-20037508,20037508,20037508"
 
 Stylesheet:
-  - style.mss
+  - kandi-background.mss
   - fonts.mss
   - shapefiles.mss
-  - landcover.mss
-  - water.mss
-  - water-features.mss
-  - road-colors-generated.mss
-  - roads.mss
-  - placenames.mss
-  - buildings.mss
-  - stations.mss
   - amenity-points.mss
+
 Layer:
   - id: amenity-points-poly
     class: points
